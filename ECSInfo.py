@@ -77,6 +77,7 @@ from aliyunsdkecs.request.v20140526.DescribeInstanceAttributeRequest import Desc
 
 import getkey
 import os
+import json
 
 fileName = 'instance.txt'
 
@@ -93,7 +94,7 @@ def main():
     dat = getIntanceID()
     print(dat)
     if dat:
-        instanceID = dat.keys()[0]
+        instanceID = list(dat.keys())[0]
         kid,ksec = getkey.getKeys()
 
         client = AcsClient(kid, ksec, 'cn-zhangjiakou')
