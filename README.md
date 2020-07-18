@@ -29,3 +29,7 @@ https://ram.console.aliyun.com/overview
 6. 创建实例前要先查换好要创建的实例硬件配置类型ID，主要是CPU和内存，拿到类型ID(InstanceType)
 
 最后，如果使用密码登陆，要使用https请求，官方建意，最好还是使用密钥对
+
+createECS.py
+
+这个文件是创建一个有公网IP的按量计费ecs服务器,
