@@ -136,7 +136,7 @@ class AliyunRunInstancesExample(object):
                     instance_ids.remove(instance['InstanceId'])
                     print('Instance boot successfully: {}'.format(instance['InstanceId']))
                     if 'PublicIpAddress' in instance and len(instance['PublicIpAddress']['IpAddress']) > 0:
-                        self.instances[instance['InstanceId']] = instance['InstanceId']['IpAddress'][0]
+                        self.instances[instance['InstanceId']] = instance['PublicIpAddress']['IpAddress'][0]
                         # self.publicIPs.append(instance['InstanceId']['IpAddress'][0])
 
             if not instance_ids:
