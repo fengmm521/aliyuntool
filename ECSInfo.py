@@ -76,15 +76,35 @@ from aliyunsdkcore.acs_exception.exceptions import ServerException
 from aliyunsdkecs.request.v20140526.DescribeInstanceAttributeRequest import DescribeInstanceAttributeRequest
 
 import getkey
-kid,ksec = getkey.getKeys()
+import os
 
-client = AcsClient(kid, ksec, 'cn-zhangjiakou')
+fileName = 'instance.txt'
 
-request = DescribeInstanceAttributeRequest()
-request.set_accept_format('json')
+def getIntanceID():
+    if os.path.exists(fileName):
+        f = open(fileName,'r')
+        jstr = f.read()
+        f.close()
+        dat = json.loads(jstr)
+        return dat
+    return None
 
-request.set_InstanceId("i-8vb4p36x0b4gqhgd7fzk")
+def main():
+    dat = getIntanceID()
+    print(dat)
+    if dat:
+        instanceID = dat.keys()[0]
+        kid,ksec = getkey.getKeys()
 
-response = client.do_action_with_exception(request)
-# python2:  print(response) 
-print(str(response, encoding='utf-8'))
+        client = AcsClient(kid, ksec, 'cn-zhangjiakou')
+
+        request = DescribeInstanceAttributeRequest()
+        request.set_accept_format('json')
+
+        request.set_InstanceId(instanceID)
+
+        response = client.do_action_with_exception(request)
+        # python2:  print(response) 
+        print(str(response, encoding='utf-8'))
+if __name__ == '__main__':
+    main()

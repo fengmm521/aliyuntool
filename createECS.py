@@ -4,6 +4,7 @@
 import json
 import time
 import traceback
+import os
 
 from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.acs_exception.exceptions import ClientException, ServerException
@@ -65,6 +66,8 @@ class AliyunRunInstancesExample(object):
         self.system_disk_category = 'cloud_efficiency'
         
         self.client = AcsClient(self.access_id, self.access_secret, self.region_id)
+
+        self.instances = {}
 
     def run(self):
         try:
@@ -132,6 +135,9 @@ class AliyunRunInstancesExample(object):
                 if RUNNING_STATUS in instance['Status']:
                     instance_ids.remove(instance['InstanceId'])
                     print('Instance boot successfully: {}'.format(instance['InstanceId']))
+                    if 'PublicIpAddress' in instance and len(instance['PublicIpAddress']['IpAddress']) > 0:
+                        self.instances[instance['InstanceId']] = instance['InstanceId']['IpAddress'][0]
+                        # self.publicIPs.append(instance['InstanceId']['IpAddress'][0])
 
             if not instance_ids:
                 print('Instances all boot successfully')
@@ -261,6 +267,28 @@ class AliyunRunInstancesExample(object):
 # Success. Instance creation succeed. InstanceIds: i-8vb4p36x0b4gqhgd7fzk
 # Instance boot successfully: i-8vb4p36x0b4gqhgd7fzk
 # Instances all boot successfully
+fileName = 'instance.txt'
+def createECS():
+    tmp = AliyunRunInstancesExample()
+    tmp.run()
+    print(tmp.instances)
+    return tmp.instances
 
+def getStr2Json(pdic):
+    jstr = json.dumps(pdic)
+    return jstr
+
+def main():
+    if os.path.exists(fileName):
+        print('instance is exists!')
+        return
+    tmp = AliyunRunInstancesExample()
+    tmp.run()
+    print(tmp.instances)
+    jstr = getStr2Json(tmp.instances)
+    f = open(fileName,'w')
+    f.write(jstr)
+    f.close()
 if __name__ == '__main__':
-    AliyunRunInstancesExample().run()
+    main()
+    
