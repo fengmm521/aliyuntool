@@ -107,5 +107,6 @@ def main():
         response = client.do_action_with_exception(request)
         # python2:  print(response) 
         print(str(response, encoding='utf-8'))
+        print(dat)
 if __name__ == '__main__':
     main()
