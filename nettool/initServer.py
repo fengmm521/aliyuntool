@@ -365,15 +365,19 @@ def changeLocalSSServerIP():
 
 def main():
     # kpth = getKeyFilePth()
-    cmds = ['pwd']
-    backs = sshcmd(cmds)
-    print(backs)
-    uploadSSServer()
-    uploadHaproxy()
-    uploadSHell()
-    uploadTools()
-    runSHell()
-    changeLocalSSServerIP()
+    ip = getIP()
+    if ip:
+        cmds = ['pwd']
+        backs = sshcmd(cmds)
+        print(backs)
+        uploadSSServer()
+        uploadHaproxy()
+        uploadSHell()
+        uploadTools()
+        runSHell()
+    else:
+        print('not find server ip file:instance.txt')
+    # changeLocalSSServerIP()
 
 def test():
     kpth = getKeyFilePth()

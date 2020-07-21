@@ -6,6 +6,7 @@ echo $CUR_PATH
 echo $basepath
 cd $basepath
 
+python3 shadowAddIP.py
 python3 initServer.py
 
-
+echo "server is run..."

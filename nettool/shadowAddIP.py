@@ -190,10 +190,13 @@ def getIP(tip):
 
 def conventToXML(tip = None):
     ip = getIP(tip)
-    base64str,password = changeJosnIP(ip)
-    sxml = savePlistToXMLPth()
-    xmltool.changeXML(sxml,ip,base64str,password)
-    cXML2Plist(sxml)
+    if ip:
+        base64str,password = changeJosnIP(ip)
+        sxml = savePlistToXMLPth()
+        xmltool.changeXML(sxml,ip,base64str,password)
+        cXML2Plist(sxml)
+    else:
+        print('not find server ip...')
 
 # def conventPlist():
 def main():
