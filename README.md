@@ -1,5 +1,11 @@
 # 阿里云云服务器python创建api例子
 
+#### 欢迎访问我的淘宝店:
+
+大家可以点下边连接进我的店看看有没有大家喜欢的东西:
+https://fengmm521.taobao.com
+
+## 设置使用环境
 使用前要先使用pip安装python的云服务器SDK
 
 https://github.com/aliyun/aliyun-openapi-python-sdk
