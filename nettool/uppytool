@@ -5,11 +5,7 @@ basepath=$(cd `dirname $0`; pwd)
 echo $CUR_PATH
 echo $basepath
 cd $basepath
-if [[ $1 = 'open' ]]; then
-    python3 createECS.py
-elif [[ $1 = 'close' ]]; then
-    python3 DeleteECS.py
-else
-    python3 ECSInfo.py
-fi
+
+python3 initServer.py
+
 

@@ -8,6 +8,8 @@
 import os,sys
 import paramiko
 import json
+import shadowAddIP
+import time
 
 fileName = 'instance.txt'
 #获取脚本路径
@@ -257,11 +259,13 @@ def sshcmd(cmds,tip = None,uname = 'root'):
         #执行命令
         allresult = []
         for i,v in enumerate(cmds):
+            print('start run cmd:%s'%(v))
             stdin, stdout, stderr = client.exec_command(v)
             #获取命令执行结果,返回的数据是一个list
             result = stdout.readlines()
             print(result)
             allresult.append(result)
+            time.sleep(0.5) #延时等0.5秒后再进行下一条指令
         return allresult
         client.close()
     except Exception as e:
@@ -352,6 +356,13 @@ def runSHell():
     for i,v in enumerate(backs):
         print(v)
 
+def changeLocalSSServerIP():
+    tip = getIP()
+    if tip:
+        shadowAddIP.conventToXML(tip)
+    else:
+        print('the not heave create server ip')
+
 def main():
     # kpth = getKeyFilePth()
     cmds = ['pwd']
@@ -362,6 +373,7 @@ def main():
     uploadSHell()
     uploadTools()
     runSHell()
+    changeLocalSSServerIP()
 
 def test():
     kpth = getKeyFilePth()
