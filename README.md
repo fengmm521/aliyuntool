@@ -33,3 +33,26 @@ https://ram.console.aliyun.com/overview
 createECS.py
 
 这个文件是创建一个有公网IP的按量计费ecs服务器,
+
+DeleteECS.py
+
+这个文件是删除一个已创建的云服务器
+
+ECSInfo.py
+
+这个文件是显示已创建的服务器信息
+
+nettool
+
+这个目录下放的是配置云服务器的相关脚本和工具
+
+## 工具使用方法
+
+``` bash
+#创建一个云服务器
+ecstool open 	
+#删除一个云服务器
+ecstool close 	
+#上传服务器工具用启动一个转发服务器程序和一个ssserver服务器,并且同时更新本地客户端的服务器地址
+ecstool server  
+```
