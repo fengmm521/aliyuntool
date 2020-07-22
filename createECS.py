@@ -279,6 +279,12 @@ def getStr2Json(pdic):
     jstr = json.dumps(pdic)
     return jstr
 
+def delayTime(s):
+    while s > 0:
+        print(str(s))
+        time.sleep(1)
+        s -=1
+
 def main():
     if os.path.exists(fileName):
         print('instance is exists!')
@@ -291,12 +297,7 @@ def main():
         f = open(fileName,'w')
         f.write(jstr)
         f.close()
-        print('3')
-        time.sleep(1)
-        print('2')
-        time.sleep(1)
-        print('1')
-        time.sleep(1)
+        delayTime(15)
         print('the server is start.....')
     else:
         print('create server erro....')
