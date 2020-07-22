@@ -1,0 +1,19 @@
+#!/bin/bash
+export PATH=/usr/local/bin/:/usr/bin:/bin:$PATH
+CUR_PATH=`pwd`
+basepath=$(cd `dirname $0`; pwd)
+echo $CUR_PATH
+echo $basepath
+
+apt-get update
+apt-get install -y haproxy
+# /usr/sbin/haproxy
+
+# nohup /usr/local/bin/ssserver -c config.json &> /dev/null &
+LOG=`nohup /usr/sbin/haproxy -f /root/haproxy/haproxy.cfg &> /dev/null & echo $!`
+# LOG=`nohup python klinetool.py > log.txt 2>&1 & echo $!`
+# # LOG="12345"
+echo $LOG
+OUTSTR=$DATE"\n"$LOG
+echo $OUTSTR > haproxyid.txt
+echo 'haproxy start'

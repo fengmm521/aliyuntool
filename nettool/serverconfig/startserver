@@ -1,0 +1,15 @@
+#!/bin/bash
+export PATH=/usr/local/bin/:/usr/bin:/bin:$PATH
+CUR_PATH=`pwd`
+basepath=$(cd `dirname $0`; pwd)
+echo $CUR_PATH
+echo $basepath
+cd $basepath/shadowsocks
+pip3 install mageserver-1.0.3.tar.gz
+bash runssserver
+cd ~/haproxy
+sh runHaproxy
+cd ~/tool
+sh runfree
+cd ~
+echo "all is run"
