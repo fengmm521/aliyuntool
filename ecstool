@@ -12,6 +12,12 @@ elif [[ $1 = 'close' ]]; then
 elif [[ $1 = 'server' ]]; then
     cd nettool
     sh uppytool
+elif [[ $1 = 'start' ]]; then
+    #statements
+    echo "create server and start server"
+    python3 createECS.py
+    cd nettool
+    sh uppytool
 else
     python3 ECSInfo.py
 fi
