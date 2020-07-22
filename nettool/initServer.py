@@ -377,7 +377,7 @@ def getSSHtoolPTH():
     pthdeep = 4
     for i in range(pthdeep):
         cpth = GetParentPath(cpth)
-    cpth + '/Documents/tool/cmdtool/sshbtc'
+    cpth = cpth + '/Documents/tool/cmdtool/sshbtc'
     return cpth
 def changeSSHTOOL(tip):
     sshpth = getSSHtoolPTH()
@@ -410,10 +410,11 @@ def main():
 def test():
     cmds = ['/bin/ps -A|grep haproxy']
     backs = sshcmd(cmds)
-    for i,v in enumerate(backs):
-        print(v)
+    if backs:
+        for i,v in enumerate(backs):
+            print(v)
 
 
 if __name__=="__main__":
-    # main()
-    test()
+    main()
+    # test()
