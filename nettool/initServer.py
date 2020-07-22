@@ -186,7 +186,7 @@ def renameDir(sdir,replacestr,tostr,exittype):
     for p in allfilepath:
         replaceFileName(p[0], p[1], replacestr, tostr)
 
-def getIP(tip):
+def getIP(tip = None):
     ip = tip
     if not tip:
         pth = GetParentPath(cur_file_dir())
@@ -355,6 +355,16 @@ def runSHell():
     backs = sshcmd(cmds)
     for i,v in enumerate(backs):
         print(v)
+    cmds = ['/bin/ps -A|grep ssserver']
+    backs = sshcmd(cmds)
+    for i,v in enumerate(backs):
+        print(v)
+    cmds = ['/bin/ps -A|grep haproxy']
+    backs = sshcmd(cmds)
+    for i,v in enumerate(backs):
+        print(v)
+
+
 
 def changeLocalSSServerIP():
     tip = getIP()
@@ -362,11 +372,29 @@ def changeLocalSSServerIP():
         shadowAddIP.conventToXML(tip)
     else:
         print('the not heave create server ip')
+def getSSHtoolPTH():
+    cpth = cur_file_dir()
+    pthdeep = 4
+    for i in range(pthdeep):
+        cpth = GetParentPath(cpth)
+    cpth + '/Documents/tool/cmdtool/sshbtc'
+    return cpth
+def changeSSHTOOL(tip):
+    sshpth = getSSHtoolPTH()
+    outstr = '''#!/bin/bash
+export PATH=/usr/local/bin/:$PATH
+echo "连接%s"
+ssh root@%s
+    '''%(tip,tip)
+    f = open(sshpth,'w')
+    f.write(outstr)
+    f.close()
 
 def main():
     # kpth = getKeyFilePth()
     ip = getIP()
     if ip:
+        changeSSHTOOL(ip)
         cmds = ['pwd']
         backs = sshcmd(cmds)
         print(backs)
@@ -380,9 +408,12 @@ def main():
     # changeLocalSSServerIP()
 
 def test():
-    kpth = getKeyFilePth()
-    print(kpth)
-    print(sys.path)
+    cmds = ['/bin/ps -A|grep haproxy']
+    backs = sshcmd(cmds)
+    for i,v in enumerate(backs):
+        print(v)
+
 
 if __name__=="__main__":
-    main()
+    # main()
+    test()

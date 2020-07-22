@@ -21,6 +21,7 @@ class AliyunRunInstancesExample(object):
 
     def __init__(self):
         kid,ksec = getkey.getKeys()
+        print(kid,ksec)
         self.access_id = kid
         self.access_secret = ksec
 
@@ -284,18 +285,21 @@ def main():
         return
     tmp = AliyunRunInstancesExample()
     tmp.run()
-    print(tmp.instances)
-    jstr = getStr2Json(tmp.instances)
-    f = open(fileName,'w')
-    f.write(jstr)
-    f.close()
-    print('3')
-    time.sleep(1)
-    print('2')
-    time.sleep(1)
-    print('1')
-    time.sleep(1)
-    print('the server is start.....')
+    if tmp.instances:
+        print(tmp.instances)
+        jstr = getStr2Json(tmp.instances)
+        f = open(fileName,'w')
+        f.write(jstr)
+        f.close()
+        print('3')
+        time.sleep(1)
+        print('2')
+        time.sleep(1)
+        print('1')
+        time.sleep(1)
+        print('the server is start.....')
+    else:
+        print('create server erro....')
 if __name__ == '__main__':
     main()
     

@@ -31,7 +31,7 @@ def GetParentPath(strPath):
 def getFilePth():
     cpth = cur_file_dir()
     #Documents/github/aliyuntool
-    fpth = GetParentPath(GetParentPath(cpth)) + os.sep + "code/key/aliyunkey/20200718103047.csv"
+    fpth = GetParentPath(GetParentPath(cpth)) + os.sep + "code/key/aliyunkey/20200722120840.csv"
     #Documents/code/key/aliyunkey/20200718103047.csv
     print(fpth)
     return fpth
